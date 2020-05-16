@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+    <!-- Breadcrumb -->
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>welcome: {{ user.username }}</h2>
+          {% if contacts %}
+              <p>Here are the property listings that you have inquired about</p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Property</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for contact in contacts %}
+                    <tr>
+                      <td>{{contact.id}}</td>
+                      <td>{{contact.listing}}</td>
+                      <td>
+                        <a class="btn btn-light" style="cursor:pointer" href="{% url 'app-listing' contact.listing_id %}">View Listing</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
